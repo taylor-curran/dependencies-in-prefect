@@ -92,3 +92,29 @@ def flow_of_sequential_tasks():
     for num in nums:
         fut = task1.submit(num, wait_for=[fut])
 ```
+
+## Setting Result Persistence Location
+
+If you are looking to rerun an already run flow instance with the same state as before, skipping the successful tasks and retrying the not run tasks in the flow. 
+
+Hitting the retry button from the flow run page of a deployed flow run achieves this given **result persistence** is configured: 
+
+We recommend setting result persistence to S3 (or Azure/GCP) like so:
+
+```python
+@flow(result_storage=S3Bucket.load(“my-bucket-block”)
+def my_flow():
+    pass
+
+```
+^In case you are wondering, a Prefect [block](https://docs.prefect.io/latest/concepts/blocks/#overview) is a way to save configuration for use in many flows. You can create and save blocks in the UI.
+
+Alternatively you can set this for all flows with the following setting:
+
+`PREFECT_DEFAULT_RESULT_STORAGE_BLOCK`
+
+## Daemonize your Prefect Worker with [Systemd](https://systemd.io/)
+
+A guide for starting a worker through systemd is found [here](https://discourse.prefect.io/t/how-to-run-a-prefect-2-worker-as-a-systemd-service-on-linux/1450).
+
+I recommend following this [docker work pool tutorial](https://docs.prefect.io/latest/tutorial/workers/) first and starting the worker on your laptop, then once you've verified that works, start a worker in a linux VM using the Systemd guide linked above.
