@@ -2,7 +2,7 @@
 
 
 ## Sending data from one task to the other
-![alt text](images/images.png)
+![alt text](images/image.png)
 Relevant docs found [here](https://docs.prefect.io/latest/guides/specifying-upstream-dependencies/#determination-methods).
 
 [passing_data_simple.py](example_scripts/passing_data_simple.py)
