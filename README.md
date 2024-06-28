@@ -102,6 +102,9 @@ Hitting the retry button from the flow run page of a deployed flow run achieves 
 We recommend setting result persistence to S3 (or Azure/GCP) like so:
 
 ```python
+from prefect import flow
+from prefect_aws import S3Bucket
+
 @flow(result_storage=S3Bucket.load(“my-bucket-block”))
 def my_flow():
     pass
